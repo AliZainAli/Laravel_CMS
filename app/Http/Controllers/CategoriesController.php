@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Category;
+use App\Post;
+
 use Illuminate\Http\Request;
 use App\Http\Requests\CategoriesRequests\CreateCategoryRequest;
 use App\Http\Requests\CategoriesRequests\UpdateCategoryRequest;
+use Illuminate\Support\Facades\Auth;
 use Symfony\Contracts\Service\Attribute\Required;
 
 class CategoriesController extends Controller
@@ -17,7 +20,7 @@ class CategoriesController extends Controller
      */
     public function index()
     {
-        return view('categories.index')->with('categories', Category::all());
+        return view('categories.index')->with('categories', Category::all())->with('posts', Post::where('user_id', '=', Auth::user()->id)->get());
     }
 
     /**
@@ -89,7 +92,7 @@ class CategoriesController extends Controller
     public function update(UpdateCategoryRequest $request, Category $category)
     {
 
-        $oldname = $request->name;
+        $oldname = $category->name;
         
         $category->update([
             'name' => $request->name

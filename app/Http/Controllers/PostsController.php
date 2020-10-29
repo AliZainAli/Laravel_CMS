@@ -5,10 +5,12 @@ namespace App\Http\Controllers;
 use App\Category;
 use App\Post;
 use App\Tag;
+use App\User;
 
 use App\Http\Requests\Posts\CreatePostRequest;
 use App\Http\Requests\Posts\UpdatePostRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 class PostsController extends Controller
@@ -17,6 +19,7 @@ class PostsController extends Controller
     public function __construct()
     {
         $this->middleware('VerifyCategoriesCount')->only(['create', 'store']);
+        $this->middleware('auth');
     }
 
     /**
@@ -26,7 +29,7 @@ class PostsController extends Controller
      */
     public function index()
     {
-        return view('posts.index')->with('posts', Post::all());
+        return view('posts.index')->with('posts', Post::where('user_id', '=', Auth::user()->id)->get());
     }
 
     /**

@@ -5,6 +5,7 @@ use App\Post;
 use App\Tag;
 use App\User;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Hash;
 
 class PostsTableSeeder extends Seeder
@@ -19,7 +20,7 @@ class PostsTableSeeder extends Seeder
 
         $author1 = User::create([
             'name' => 'Ali Zain',
-            'email' => 'Alizain@laravel.com',
+            'email' => 'alizain@laravel.com',
             'password' => Hash::make('passwword')
         ]);
 
@@ -48,8 +49,9 @@ class PostsTableSeeder extends Seeder
             'description' => 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
             'content' => 'Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.',
             'category_id' => $category1->id,
-            'image' => 'posts\6.jpg',
-            'user_id' => $author1->id
+            'image' => 'posts/6.jpg',
+            'user_id' => $author1->id,
+            'published_at' => Carbon::now(),
         ]);
 
         $post2 = $author2->posts()->create([
@@ -57,7 +59,8 @@ class PostsTableSeeder extends Seeder
             'description' => 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
             'content' => 'Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.',
             'category_id' => $category2->id,
-            'image' => 'posts\7.jpg'
+            'image' => 'posts/7.jpg',
+            'published_at' => Carbon::now(),
         ]);
 
         $post3 =  $author1->posts()->create([
@@ -65,7 +68,8 @@ class PostsTableSeeder extends Seeder
             'description' => 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
             'content' => 'Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.',
             'category_id' => $category3->id,
-            'image' => 'posts\8.jpg'
+            'image' => 'posts/8.jpg',
+            'published_at' => Carbon::now(),
         ]);
 
         $post4 = $author2->posts()->create([
@@ -73,7 +77,8 @@ class PostsTableSeeder extends Seeder
             'description' => 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
             'content' => 'Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.',
             'category_id' => $category2->id,
-            'image' => 'posts\9.jpg'
+            'image' => 'posts/9.jpg',
+            'published_at' => Carbon::now(),
         ]);
 
 
